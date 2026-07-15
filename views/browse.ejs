@@ -1,0 +1,156 @@
+<%- include("partials/head", { title: "Browse" }) %>
+
+<%- include("partials/navbar") %>
+
+<section class="page-header">
+    <h1>Browse Items</h1>
+    <p>Explore all reported lost and found items.</p>
+</section>
+
+<section class="search-section">
+
+    <form action="/browse" method="GET" class="filter-bar">
+
+        <input
+            type="text"
+            name="search"
+            placeholder="Search item..."
+            value="<%= search %>">
+
+        <select name="type">
+
+            <option value="">All Items</option>
+
+            <option value="Lost" <%= type === "Lost" ? "selected" : "" %>>
+                Lost
+            </option>
+
+            <option value="Found" <%= type === "Found" ? "selected" : "" %>>
+                Found
+            </option>
+
+        </select>
+
+        <select name="category">
+
+            <option value="">All Categories</option>
+
+            <option value="Electronics" <%= category === "Electronics" ? "selected" : "" %>>
+                Electronics
+            </option>
+
+            <option value="Books" <%= category === "Books" ? "selected" : "" %>>
+                Books
+            </option>
+
+            <option value="ID Card" <%= category === "ID Card" ? "selected" : "" %>>
+                ID Card
+            </option>
+
+            <option value="Wallet" <%= category === "Wallet" ? "selected" : "" %>>
+                Wallet
+            </option>
+
+            <option value="Keys" <%= category === "Keys" ? "selected" : "" %>>
+                Keys
+            </option>
+
+            <option value="Others" <%= category === "Others" ? "selected" : "" %>>
+                Others
+            </option>
+
+        </select>
+
+        <button class="btn-green">
+            Search
+        </button>
+
+    </form>
+
+</section>
+
+<section class="browse-grid">
+
+    <% if(items.length === 0){ %>
+
+        <div class="empty-state">
+
+            <h2>📦 No Items Found</h2>
+
+            <p>There are no matching reports.</p>
+
+            <a href="/report" class="btn-green">
+                Report an Item
+            </a>
+
+        </div>
+
+    <% } else { %>
+
+        <% items.forEach(item => { %>
+
+            <div class="item-card">
+
+                <% if (item.image) { %>
+
+                    <img
+                        src="<%= item.image %>"
+                        alt="<%= item.itemName %>"
+                        class="item-image">
+
+                <% } else { %>
+
+                    <img
+                        src="/images/no-image.png"
+                        alt="No Image Available"
+                        class="item-image">
+
+                <% } %>
+
+                <div class="item-header">
+
+                    <h3><%= item.itemName %></h3>
+
+                    <span class="<%= item.itemType === 'Found' ? 'found' : 'lost' %>">
+                        <%= item.itemType %>
+                    </span>
+
+                </div>
+
+                <div class="item-body">
+
+                    <p>
+                        <strong>📂 Category:</strong>
+                        <%= item.category %>
+                    </p>
+
+                    <p>
+                        <strong>📍 Location:</strong>
+                        <%= item.location %>
+                    </p>
+
+                    <p>
+                        <strong>📝 Description:</strong><br>
+                        <%= item.description %>
+                    </p>
+
+                    <p class="report-date">
+                        📅 <%= new Date(item.createdAt).toLocaleDateString() %>
+                    </p>
+
+                    <p>
+                        <strong>📞 Contact:</strong>
+                        <%= item.contact %>
+                    </p>
+
+                </div>
+
+            </div>
+
+        <% }) %>
+
+    <% } %>
+
+</section>
+
+<%- include("partials/footer") %>

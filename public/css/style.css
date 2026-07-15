@@ -1,0 +1,137 @@
+/* =========================
+   RESET
+========================= */
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+/* =========================
+   VARIABLES
+========================= */
+
+:root{
+    --purple:#8A2BE2;
+    --green:#32CD32;
+    --dark:#222;
+    --white:#fff;
+}
+
+/* =========================
+   GLOBAL
+========================= */
+
+body{
+    font-family:"Space Grotesk",sans-serif;
+    background:#ffffff;
+    color:#222;
+}
+
+/* =========================
+   BUTTONS
+========================= */
+
+.btn-green{
+    background:var(--green);
+    color:white;
+    padding:15px 35px;
+    border-radius:14px;
+    text-decoration:none;
+    font-weight:600;
+    transition:.3s;
+}
+
+.btn-green:hover{
+    transform:translateY(-3px);
+}
+
+.btn-outline{
+    border:2px solid var(--purple);
+    color:var(--purple);
+    padding:15px 35px;
+    border-radius:14px;
+    text-decoration:none;
+    font-weight:600;
+    transition:.3s;
+}
+
+.btn-outline:hover{
+    background:var(--purple);
+    color:white;
+}
+
+.returned {
+    background: #32cd32;
+    color: white;
+    padding: 5px 12px;
+    border-radius: 20px;
+}
+
+
+.claimed {
+    background: #ff9800;
+    color: white;
+    padding: 5px 12px;
+    border-radius: 20px;
+}
+
+
+.open {
+    background: #8a2be2;
+    color: white;
+    padding: 5px 12px;
+    border-radius: 20px;
+}
+
+/* =========================
+   MY REPORT ACTION BUTTONS
+========================= */
+
+.report-actions {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 15px;
+    margin-top: 20px;
+}
+
+.report-actions form {
+    margin: 0;
+}
+
+.edit-btn,
+.delete-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 150px;
+    padding: 12px 20px;
+    border-radius: 12px;
+    text-decoration: none;
+    font-weight: 600;
+    transition: 0.3s ease;
+}
+
+.edit-btn {
+    background: var(--purple);
+    color: white;
+}
+
+.edit-btn:hover {
+    background: #7324c2;
+    transform: translateY(-2px);
+}
+
+.delete-btn {
+    background: #ef4444;
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+
+.delete-btn:hover {
+    background: #dc2626;
+    transform: translateY(-2px);
+}

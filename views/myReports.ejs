@@ -1,0 +1,134 @@
+<%- include("partials/head", { title: "My Reports" }) %>
+
+<%- include("partials/navbar") %>
+
+<section class="page-header">
+
+    <h1>My Reports</h1>
+
+    <p>Manage all your reported items.</p>
+
+</section>
+
+<section class="browse-grid">
+
+    <% if(items.length === 0){ %>
+
+        <div class="empty-state">
+
+            <h2>📦 No Items Found</h2>
+
+            <p>There are no matching reports.</p>
+
+            <a href="/report" class="btn-green">
+                Report an Item
+            </a>
+
+        </div>
+
+    <% } else { %>
+
+        <% items.forEach(item => { %>
+
+            <div class="item-card">
+
+                <% if (item.image) { %>
+
+                    <img
+                        src="<%= item.image %>"
+                        alt="<%= item.itemName %>"
+                        class="item-image">
+
+                <% } else { %>
+
+                    <img
+                        src="/images/no-image.png"
+                        alt="No Image Available"
+                        class="item-image">
+
+                <% } %>
+
+                <div class="item-header">
+
+                    <h3><%= item.itemName %></h3>
+
+                    <span class="<%= item.itemType === "Found" ? "found" : "lost" %>">
+                        <%= item.itemType %>
+                    </span>
+
+                </div>
+
+                <div class="item-body">
+
+                    <p><strong>📂 Category:</strong> <%= item.category %></p>
+
+                    <p><strong>📍 Location:</strong> <%= item.location %></p>
+
+                    <p><strong>📝 Description:</strong> <%= item.description %></p>
+                    
+                    <p>
+                        <strong>Status:</strong>
+
+                        <span class="
+                        <%= 
+                        item.status === 'Returned' 
+                        ? 'returned' 
+                        : item.status === 'Claimed'
+                        ? 'claimed'
+                        : 'open'
+                        %>
+                        ">
+                            <%= item.status %>
+                        </span>
+                    </p>
+
+                    <form action="/status/<%= item._id %>" method="POST">
+
+                        <button class="btn-outline">
+
+                            <%= item.status === "Open"
+                                ? "Mark as Claimed"
+                                : item.status === "Claimed"
+                                ? "🎉 Mark as Returned"
+                                : "Reopen Report" %>
+
+                        </button>
+
+                    </form>
+
+                    <p class="report-date">
+                        📅 <%= new Date(item.createdAt).toLocaleDateString() %>
+                    </p>
+
+                    <p>
+                        <strong>📞 Contact:</strong>
+                        <%= item.contact %>
+                    </p>
+
+                </div>
+
+                <div class="report-actions">
+
+                    <a href="/edit/<%= item._id %>" class="edit-btn">
+                        ✏ Edit Report
+                    </a>
+
+                    <form action="/delete/<%= item._id %>" method="POST">
+
+                        <button type="submit" class="delete-btn">
+                            🗑 Delete Report
+                        </button>
+
+                    </form>
+
+                </div>
+
+            </div>
+
+        <% }) %>
+
+    <% } %>
+
+</section>
+
+<%- include("partials/footer") %>

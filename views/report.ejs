@@ -1,0 +1,80 @@
+<%- include("partials/head", { title: "Report" }) %>
+
+<%- include("partials/navbar") %>
+
+<section class="page-header">
+    <h1>Report an Item</h1>
+    <p>Help reunite lost belongings with their owners.</p>
+</section>
+
+<section class="report-container">
+
+    <form
+        class="report-form"
+        action="/report"
+        method="POST"
+        enctype="multipart/form-data">
+
+        <label>Item Status</label>
+        <select name="itemType" required>
+            <option value="Lost">Lost</option>
+            <option value="Found">Found</option>
+        </select>
+
+        <label>Item Name</label>
+        <input
+            type="text"
+            name="itemName"
+            placeholder="Enter item name"
+            required
+        >
+
+        <label>Category</label>
+        <input
+            type="text"
+            name="category"
+            placeholder="Example: Electronics"
+            required
+        >
+
+        <label>Location</label>
+        <input
+            type="text"
+            name="location"
+            placeholder="Where was it lost/found?"
+            required
+        >
+
+        <label>Description</label>
+        <textarea
+            name="description"
+            rows="5"
+            placeholder="Describe the item..."
+            required
+        ></textarea>
+
+        <label>Contact Information</label>
+
+        <input
+            type="text"
+            name="contact"
+            placeholder="e.g. +91 9876543210 or yourname@gmail.com"
+            maxlength="100"
+            required>
+
+        <label>Item Image</label>
+
+        <input
+            type="file"
+            name="image"
+            accept="image/*">
+
+        <button class="btn-green">
+            Submit Report
+        </button>
+
+    </form>
+
+</section>
+
+<%- include("partials/footer") %>

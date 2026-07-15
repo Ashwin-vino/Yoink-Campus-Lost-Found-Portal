@@ -1,0 +1,151 @@
+<%- include("partials/head",{title:"Home"}) %>
+
+<%- include("partials/navbar") %>
+
+<section class="hero">
+
+    <div class="hero-content">
+
+        <h1>
+            <span class="logo-black">Yoink</span><span class="logo-green">!</span>
+        </h1>
+
+        <p>
+            Campus Lost & Found Portal
+        </p>
+
+        <span class="hero-subtitle">
+            Helping students reconnect with their lost belongings quickly and securely.
+        </span>
+
+        <div class="hero-buttons">
+
+            <a href="/report" class="btn-green">
+                Report Found Item
+            </a>
+
+            <a href="/browse" class="btn-outline">
+                I Lost Something
+            </a>
+
+        </div>
+
+    </div>
+
+</section>
+
+<section class="features">
+
+    <div class="feature-card">
+        <div class="icon">🔍</div>
+        <h3>Browse Items</h3>
+        <p>Search through lost and found items reported across campus.</p>
+    </div>
+
+    <div class="feature-card">
+        <div class="icon">📦</div>
+        <h3>Report Found</h3>
+        <p>Found something? Upload it so the owner can find it quickly.</p>
+    </div>
+
+    <div class="feature-card">
+        <div class="icon">🤝</div>
+        <h3>Claim Items</h3>
+        <p>Connect with the finder and safely claim your belongings.</p>
+    </div>
+
+</section>
+
+<section class="stats">
+
+    <div class="stat-card">
+        <h2><%= totalItems %></h2>
+        <p>Total Reports</p>
+    </div>
+
+    <div class="stat-card">
+        <h2><%= lostItems %></h2>
+        <p>Lost Items</p>
+    </div>
+
+    <div class="stat-card">
+        <h2><%= foundItems %></h2>
+        <p>Found Items</p>
+    </div>
+
+    <div class="stat-card">
+        <h2><%= returnedItems %></h2>
+        <p>🎉 Returned Items</p>
+    </div>
+
+</section>
+
+<section class="page-header">
+
+    <h1>Recent Reports</h1>
+
+    <p>Latest items reported by students.</p>
+
+</section>
+
+<section class="browse-grid">
+
+    <% if(recentItems.length === 0){ %>
+
+        <div class="empty-state">
+
+            <h2>No Reports Yet</h2>
+
+            <p>Be the first to report a lost or found item.</p>
+
+        </div>
+
+    <% } else { %>
+
+        <% recentItems.forEach(item => { %>
+
+            <div class="item-card">
+
+                <% if (item.image) { %>
+
+                    <img
+                        src="<%= item.image %>"
+                        alt="<%= item.itemName %>"
+                        class="item-image">
+
+                <% } else { %>
+
+                    <img
+                        src="/images/no-image.png"
+                        alt="No Image Available"
+                        class="item-image">
+
+                <% } %>
+
+                <div class="item-header">
+
+                    <h3><%= item.itemName %></h3>
+
+                    <span class="<%= item.itemType === 'Found' ? 'found' : 'lost' %>">
+                        <%= item.itemType %>
+                    </span>
+
+                </div>
+
+                <div class="item-body">
+
+                    <p><strong>📂</strong> <%= item.category %></p>
+
+                    <p><strong>📍</strong> <%= item.location %></p>
+
+                </div>
+
+            </div>
+
+        <% }) %>
+
+    <% } %>
+
+</section>
+
+<%- include("partials/footer") %>
