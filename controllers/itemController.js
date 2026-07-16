@@ -25,7 +25,7 @@ exports.getBrowse = async (req, res) => {
         console.error(err);
         console.error("===========================");
 
-        res.status(500).send("Error");
+        res.status(500).send(err.message);
     }
 };
 
@@ -86,7 +86,7 @@ exports.getMyReports = async (req, res) => {
         console.error(err);
         console.error("===========================");
 
-        res.status(500).send("Error");
+        res.status(500).send(err.message);
     }
 };
 
@@ -108,7 +108,7 @@ exports.getEditReport = async (req, res) => {
         console.error(err);
         console.error("===========================");
 
-        res.status(500).send("Error");
+        res.status(500).send(err.message);
     }
 };
 
@@ -138,7 +138,7 @@ exports.updateReport = async (req, res) => {
         console.error(err);
         console.error("===========================");
 
-        res.status(500).send("Error Updating");
+        res.status(500).send(err.message);
     }
 };
 
@@ -161,7 +161,7 @@ exports.deleteReport = async (req, res) => {
         console.error(err);
         console.error("===========================");
 
-        res.status(500).send("Error deleting report");
+        res.status(500).send(err.message);
     }
 };
 
@@ -191,6 +191,6 @@ exports.toggleStatus = async (req, res) => {
         console.error(err);
         console.error("===========================");
 
-        res.status(500).send("Error Updating Status");
+        res.status(500).send(err.message);
     }
 };
