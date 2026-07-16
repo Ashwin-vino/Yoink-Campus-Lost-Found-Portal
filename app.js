@@ -19,9 +19,14 @@ const app = express();
 const PORT = process.env.PORT || 5000;
 const sessionSecret = process.env.SESSION_SECRET || "change-me-in-production";
 
-connectDB().catch((error) => {
-    console.error("MongoDB connection failed during startup:", error.message);
-});
+(async () => {
+    try {
+        await connectDB();
+        console.log("✅ Database Ready");
+    } catch (error) {
+        console.error("❌ MongoDB Startup Error:", error);
+    }
+})();
 
 // Middleware
 app.set("trust proxy", 1);
