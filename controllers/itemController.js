@@ -44,10 +44,9 @@ exports.getReport = (req, res) => {
 // ===========================
 exports.createReport = async (req, res) => {
     try {
-
-        console.error("========== ERROR ==========");
-        console.error(err);
-        console.error("===========================");
+        if (!req.user) {
+            return res.redirect("/auth/google");
+        }
 
         await Item.create({
             itemType: req.body.itemType,
@@ -95,6 +94,10 @@ exports.getMyReports = async (req, res) => {
 // ===========================
 exports.getEditReport = async (req, res) => {
     try {
+        if (!req.user) {
+            return res.redirect("/auth/google");
+        }
+
         const item = await Item.findById(req.params.id);
         if (!item) {
             return res.send("Item not found");
@@ -117,6 +120,10 @@ exports.getEditReport = async (req, res) => {
 // ===========================
 exports.updateReport = async (req, res) => {
     try {
+        if (!req.user) {
+            return res.redirect("/auth/google");
+        }
+
         const item = await Item.findById(req.params.id);
         if (!item) {
             return res.send("Item not found");
@@ -147,6 +154,10 @@ exports.updateReport = async (req, res) => {
 // ===========================
 exports.deleteReport = async (req, res) => {
     try {
+        if (!req.user) {
+            return res.redirect("/auth/google");
+        }
+
         const item = await Item.findById(req.params.id);
         if (!item) {
             return res.send("Item not found");
@@ -170,6 +181,10 @@ exports.deleteReport = async (req, res) => {
 // ===========================
 exports.toggleStatus = async (req, res) => {
     try {
+        if (!req.user) {
+            return res.redirect("/auth/google");
+        }
+
         const item = await Item.findById(req.params.id);
         if (!item) {
             return res.send("Item not found");
