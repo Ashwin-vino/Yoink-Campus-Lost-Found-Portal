@@ -21,8 +21,11 @@ exports.getBrowse = async (req, res) => {
         const items = await Item.find(query).sort({ createdAt: -1 });
         res.render("browse", { items, search, type, category });
     } catch (err) {
-        console.log(err);
-        res.send("Error");
+        console.error("========== ERROR ==========");
+        console.error(err);
+        console.error("===========================");
+
+        res.status(500).send("Error");
     }
 };
 
@@ -42,8 +45,9 @@ exports.getReport = (req, res) => {
 exports.createReport = async (req, res) => {
     try {
 
-        console.log("req.file:", req.file);
-        console.log("req.body:", req.body);
+        console.error("========== ERROR ==========");
+        console.error(err);
+        console.error("===========================");
 
         await Item.create({
             itemType: req.body.itemType,
@@ -59,8 +63,11 @@ exports.createReport = async (req, res) => {
         res.redirect("/browse");
 
     } catch (err) {
-        console.log(err);
-        res.send("Error Saving Item");
+        console.error("========== ERROR ==========");
+        console.error(err);
+        console.error("===========================");
+
+        res.status(500).send(err.message);
     }
 };
 
@@ -75,8 +82,11 @@ exports.getMyReports = async (req, res) => {
         const items = await Item.find({ user: req.user._id }).sort({ createdAt: -1 });
         res.render("myReports", { items });
     } catch (err) {
-        console.log(err);
-        res.send("Error");
+        console.error("========== ERROR ==========");
+        console.error(err);
+        console.error("===========================");
+
+        res.status(500).send("Error");
     }
 };
 
@@ -94,8 +104,11 @@ exports.getEditReport = async (req, res) => {
         }
         res.render("item", { item });
     } catch (err) {
-        console.log(err);
-        res.send("Error");
+        console.error("========== ERROR ==========");
+        console.error(err);
+        console.error("===========================");
+
+        res.status(500).send("Error");
     }
 };
 
@@ -121,8 +134,11 @@ exports.updateReport = async (req, res) => {
         });
         res.redirect("/my-reports");
     } catch (err) {
-        console.log(err);
-        res.send("Error Updating");
+        console.error("========== ERROR ==========");
+        console.error(err);
+        console.error("===========================");
+
+        res.status(500).send("Error Updating");
     }
 };
 
@@ -141,8 +157,11 @@ exports.deleteReport = async (req, res) => {
         await Item.findByIdAndDelete(req.params.id);
         res.redirect("/my-reports");
     } catch (err) {
-        console.log(err);
-        res.send("Error deleting report");
+        console.error("========== ERROR ==========");
+        console.error(err);
+        console.error("===========================");
+
+        res.status(500).send("Error deleting report");
     }
 };
 
@@ -168,7 +187,10 @@ exports.toggleStatus = async (req, res) => {
         await item.save();
         res.redirect("/my-reports");
     } catch (err) {
-        console.log(err);
-        res.send("Error Updating Status");
+        console.error("========== ERROR ==========");
+        console.error(err);
+        console.error("===========================");
+
+        res.status(500).send("Error Updating Status");
     }
 };
